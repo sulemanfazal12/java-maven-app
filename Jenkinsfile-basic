@@ -1,4 +1,5 @@
 def CODE_CHANGE = getGitChanges()
+
 pipeline {
     agent none
     stages {
@@ -17,7 +18,7 @@ pipeline {
             }
             steps {
                 script {
-                    echo "1 Testing the application..."
+                    echo "Testing the application..."
                 }
             }
         }
