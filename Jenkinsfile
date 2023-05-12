@@ -9,7 +9,6 @@
 	        stage('build') {
 	            steps {
 	                script {
-	                    echo "Building the application..."
                             echo "Builing version of ${NEW_VERSION}"
 	                }
 	            }
