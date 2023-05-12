@@ -1,38 +1,32 @@
-def gv
-
-pipeline {
-    agent any
-    stages {
-        stage("init") {
-            steps {
-                script {
-                    gv = load "script.groovy"
-                }
-            }
+	#!/usr/bin/env groovy
+	
+	pipeline {
+	    agent none
+        environment {
+            NEW_VERSION = '1.3.0'
         }
-        stage("build jar") {
-            steps {
-                script {
-                    echo "building jar"
-                    //gv.buildJar()
-                }
-            }
-        }
-        stage("build image") {
-            steps {
-                script {
-                    echo "building image"
-                    //gv.buildImage()
-                }
-            }
-        }
-        stage("deploy") {
-            steps {
-                script {
-                    echo "deploying"
-                    //gv.deployApp()
-                }
-            }
-        }
-    }   
-}
+	    stages {
+	        stage('build') {
+	            steps {
+	                script {
+	                    echo "Building the application..."
+                        echo "Builing version of ${NEW_VERSION}"
+	                }
+	            }
+	        }
+	        stage('test') {
+	            steps {
+	                script {
+	                    echo "Testing the application..."
+	                }
+	            }
+	        }
+	        stage('deploy') {
+	            steps {
+	                script {
+	                    echo "Deploying the application..."
+	                }
+	            }
+	        }
+	    }
+	}
