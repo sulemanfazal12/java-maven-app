@@ -10,7 +10,7 @@
 	            steps {
 	                script {
 	                    echo "Building the application..."
-                        echo "Builing version of ${NEW_VERSION}"
+                            echo "Builing version of ${NEW_VERSION}"
 	                }
 	            }
 	        }
