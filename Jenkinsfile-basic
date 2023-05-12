@@ -1,4 +1,4 @@
-CODE_CHANGE = getGitChanges()
+def CODE_CHANGE = getGitChanges()
 pipeline {
     agent none
     stages {
