@@ -1,5 +1,4 @@
-#!/usr/bin/env groovy
-
+CODE_CHANGE = getGitChanges()
 pipeline {
     agent none
     stages {
@@ -13,7 +12,7 @@ pipeline {
         stage('test') {
             when {
                 expression {
-                   BRANCH_NAME == 'dev'
+                  CODE_CHANGE == true
                 }
             }
             steps {
