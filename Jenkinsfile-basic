@@ -41,13 +41,13 @@ pipeline {
                 message "select the environmant to deploy"
                 ok "Done"
                 parameters {
-                    choice(name: 'VERSION', choices: ['dev', 'test', 'prod'], description: '')
+                    choice(name: 'VERSION1', choices: ['dev', 'test', 'prod'], description: '')
                 }
             }
             steps {
                 script {
                     gv.deployApp()
-                    echo " Deploying  to ${params.VERSION}"
+                    echo " Deploying  to ${params.VERSION1}"
                 }
             }
         }
