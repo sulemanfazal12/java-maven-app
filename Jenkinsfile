@@ -1,53 +1,40 @@
 #!/usr/bin/env groovy
 
-def gv
-
 pipeline {
-    agent any
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
-
+    agent none
+    environment {
+        NEW_VERSION = '1.3.0'
     }
     stages {
-        stage("init") {
+        
+        stage('test') {
             steps {
                 script {
-                   gv = load "script.groovy"
+                    echo "Testing the application..."
                 }
             }
         }
         stage('build') {
-            steps {
-                script {
-                    gv.buildApp()
-                }
-            }
-        }
-        stage('test') {
-            when {
+            when{
                 expression {
-                    params.executeTests
+                    BRANCH_NAME == 'master'
                 }
             }
             steps {
                 script {
-                    gv.testApp()
+                    echo "Builing version of ${NEW_VERSION}"
                 }
             }
         }
         stage('deploy') {
-            input {
-                message "select the environmant to deploy"
-                ok "Done"
-                parameters {
-                    choice(name: 'ENV', choices: ['dev', 'test', 'prod'], description: '')
+            when{
+                expression {
+                    BRANCH_NAME == 'master'
                 }
             }
             steps {
                 script {
-                    gv.deployApp()
-                    echo " Deploying  to ${ENV}"
+                    echo "Deploying the application..."
                 }
             }
         }
