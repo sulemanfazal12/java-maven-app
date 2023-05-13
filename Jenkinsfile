@@ -6,13 +6,7 @@ pipeline {
         NEW_VERSION = '1.3.0'
     }
     stages {
-        stage('build') {
-            steps {
-                script {
-                    echo "Builing version of ${NEW_VERSION}"
-                }
-            }
-        }
+        
         stage('test') {
             steps {
                 script {
@@ -20,7 +14,24 @@ pipeline {
                 }
             }
         }
+        stage('build') {
+            when{
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
+            steps {
+                script {
+                    echo "Builing version of ${NEW_VERSION}"
+                }
+            }
+        }
         stage('deploy') {
+            when{
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
             steps {
                 script {
                     echo "Deploying the application..."
